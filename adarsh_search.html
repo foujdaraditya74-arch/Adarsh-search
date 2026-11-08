@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Adarsh Search</title>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;display:flex;flex-direction:column;font-family:Arial, sans-serif;background:#fff;color:#202124}
+    header{display:flex;justify-content:flex-end;gap:18px;padding:18px 24px;font-size:14px}
+    header a{color:#444;text-decoration:none}
+    main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px 90px}
+    .logo{font-size:clamp(42px,10vw,68px);font-weight:600;letter-spacing:-3px;margin-bottom:28px}
+    .logo span:nth-child(1){color:#4285f4}.logo span:nth-child(2){color:#ea4335}.logo span:nth-child(3){color:#fbbc05}.logo span:nth-child(4){color:#4285f4}.logo span:nth-child(5){color:#34a853}.logo span:nth-child(6){color:#ea4335}
+    form{width:min(584px,100%);display:flex;align-items:center;border:1px solid #dfe1e5;border-radius:28px;padding:7px 14px;box-shadow:0 1px 5px #00000012}
+    form:focus-within,form:hover{box-shadow:0 1px 8px #00000025;border-color:transparent}
+    input{flex:1;min-width:0;border:0;outline:0;font-size:16px;padding:10px;background:transparent}
+    .search-icon{color:#777;margin-right:8px;font-size:19px}
+    button{border:0;border-radius:8px;background:#f8f9fa;padding:11px 18px;margin:24px 5px 0;font-size:14px;cursor:pointer}
+    button:hover{border:1px solid #dadce0;margin:23px 4px 0}
+    .hint{font-size:13px;color:#666;margin-top:24px;text-align:center}
+    footer{background:#f2f2f2;padding:16px 24px;color:#666;font-size:14px;text-align:center}
+  </style>
+</head>
+<body>
+  <header><a href="https://www.google.com/">Google</a><a href="https://github.com/">GitHub</a></header>
+  <main>
+    <div class="logo" aria-label="Adarsh Search"><span>A</span><span>d</span><span>a</span><span>r</span><span>s</span><span>h</span> <span style="color:#4285f4;letter-spacing:-2px">Search</span></div>
+    <form id="searchForm">
+      <span class="search-icon">⌕</span>
+      <input id="query" type="search" placeholder="यहाँ कुछ Search करें..." aria-label="Search" required>
+    </form>
+    <div>
+      <button type="submit" form="searchForm">Adarsh Search</button>
+      <button type="button" id="lucky">I'm Feeling Lucky</button>
+    </div>
+    <div class="hint">यह शुरुआती Search Website Google के परिणामों का उपयोग करती है।</div>
+  </main>
+  <footer>Adarsh Search · आपका अपना Search Page</footer>
+  <script>
+    const form = document.getElementById('searchForm');
+    const input = document.getElementById('query');
+    function search(lucky=false){
+      const q=input.value.trim();
+      if(!q){input.focus();return;}
+      const url='https://www.google.com/search?q='+encodeURIComponent(q);
+      window.location.href=lucky ? 'https://www.google.com/search?btnI=1&q='+encodeURIComponent(q) : url;
+    }
+    form.addEventListener('submit',e=>{e.preventDefault();search(false)});
+    document.getElementById('lucky').addEventListener('click',()=>search(true));
+  </script>
+</body>
+</html>
