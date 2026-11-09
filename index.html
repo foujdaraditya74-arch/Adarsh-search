@@ -1,44 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Adarsh Search</title>
-<style>
-*{box-sizing:border-box}body{margin:0;background:#fff;color:#202124;font-family:Arial,sans-serif;min-height:100vh;display:flex;flex-direction:column}
-header{padding:18px 24px;text-align:right}header a{color:#5f6368;text-decoration:none;font-size:14px}
-main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px 100px}
-.logo{font-size:clamp(42px,12vw,72px);font-weight:600;letter-spacing:-3px;margin-bottom:28px;color:#4285f4}
-.logo span:nth-child(2){color:#ea4335}.logo span:nth-child(3){color:#fbbc05}.logo span:nth-child(4){color:#4285f4}.logo span:nth-child(5){color:#34a853}.logo span:nth-child(6){color:#ea4335}
-form{width:min(600px,100%)}.search{display:flex;align-items:center;border:1px solid #dfe1e5;border-radius:28px;padding:0 16px;height:52px;box-shadow:0 1px 6px #00000012}
-.search:hover,.search:focus-within{box-shadow:0 1px 8px #00000030;border-color:transparent}
-.search svg{width:20px;height:20px;fill:#9aa0a6;flex-shrink:0}
-input{border:0;outline:0;flex:1;min-width:0;font-size:16px;padding:0 12px;background:transparent;color:#202124}
-.buttons{display:flex;justify-content:center;gap:12px;margin-top:28px}.buttons button{background:#f8f9fa;border:1px solid #f8f9fa;border-radius:4px;padding:10px 16px;color:#3c4043;font-size:14px;cursor:pointer}.buttons button:hover{border-color:#dadce0;box-shadow:0 1px 1px #00000010}
-.note{margin-top:26px;font-size:13px;color:#70757a;text-align:center;line-height:1.6}
-footer{background:#f2f2f2;padding:15px 22px;color:#70757a;font-size:14px}
-@media(max-width:480px){header{padding:14px}main{padding-bottom:70px}.buttons button{padding:10px 12px}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Adarsh Search</title>
+  <meta name="description" content="Adarsh Search helps you search the web quickly and easily.">
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;color:#202124;background:#fff}
+    header{display:flex;justify-content:flex-end;gap:20px;padding:18px 24px}
+    header a,footer a{color:#5f6368;text-decoration:none}
+    header a:hover,footer a:hover{text-decoration:underline}
+    .hero{min-height:62vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px 16px}
+    .logo{font-size:clamp(42px,10vw,72px);font-weight:600;letter-spacing:-3px;margin-bottom:28px}
+    .logo span:nth-child(2){color:#4285f4}.logo span:nth-child(3){color:#ea4335}
+    .logo span:nth-child(4){color:#fbbc05}.logo span:nth-child(5){color:#4285f4}
+    .logo span:nth-child(6){color:#34a853}.logo span:nth-child(7){color:#ea4335}
+    form{width:min(600px,100%)}
+    .search{display:flex;align-items:center;border:1px solid #dfe1e5;border-radius:28px;padding:0 16px;height:50px}
+    .search:hover,.search:focus-within{box-shadow:0 1px 6px #0002;border-color:transparent}
+    .search svg{width:20px;height:20px;fill:#9aa0a6;flex-shrink:0}
+    input{border:0;outline:0;flex:1;min-width:0;font-size:16px;padding:12px}
+    .buttons{display:flex;justify-content:center;gap:12px;margin-top:28px}
+    button{border:1px solid #f8f9fa;background:#f8f9fa;border-radius:4px;padding:10px 16px;color:#3c4043;cursor:pointer}
+    button:hover{border-color:#dadce0;box-shadow:0 1px 1px #0001}
+    .note{font-size:13px;color:#70757a;text-align:center;margin-top:24px}
+    footer{background:#f2f2f2;padding:18px 24px;display:flex;flex-wrap:wrap;gap:18px;justify-content:center}
+    section{max-width:850px;margin:0 auto;padding:30px 20px;line-height:1.7}
+    section h2{color:#202124}section h3{margin-top:22px}
+    .contact-email{overflow-wrap:anywhere}
+    @media(max-width:480px){header{padding:16px}footer{gap:12px;font-size:14px}}
+  </style>
 </head>
 <body>
-<header><a href="https://www.google.com" target="_blank" rel="noopener">Google</a></header>
-<main>
-<div class="logo" aria-label="Adarsh Search"><span>A</span><span>d</span><span>a</span><span>r</span><span>s</span><span>h</span></div>
-<form id="searchForm">
-<div class="search">
-<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 10-.71.71l.27.28v.78L20 21.49 21.49 20l-5.99-6zM10 14.5A4.5 4.5 0 1110 5.5a4.5 4.5 0 010 9z"/></svg>
-<input id="q" name="q" type="search" placeholder="Search Google..." autocomplete="off" required>
-</div>
-<div class="buttons"><button type="submit">Search</button><button type="button" id="lucky">I'm Feeling Lucky</button></div>
-</form>
-<div class="note">Search the web with Google<br>Results open on Google Search.</div>
-</main>
-<footer>Adarsh Search · Powered by Google Search</footer>
-<script>
-const form=document.getElementById('searchForm'),q=document.getElementById('q');
-function go(lucky=false){const query=q.value.trim();if(!query){q.focus();return}const url='https://www.google.com/search?q='+encodeURIComponent(query);location.href=lucky?'https://www.google.com/search?q='+encodeURIComponent(query)+'&btnI=1':url}
-form.addEventListener('submit',e=>{e.preventDefault();go()});
-document.getElementById('lucky').addEventListener('click',()=>go(true));
-</script>
+  <header><a href="#about">About</a><a href="#contact">Contact</a></header>
+
+  <main>
+    <div class="hero">
+      <div class="logo" aria-label="Adarsh Search"><span>A</span><span>d</span><span>a</span><span>r</span><span>s</span><span>h</span><span> Search</span></div>
+      <form action="https://www.google.com/search" method="get" target="_blank" role="search">
+        <div class="search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.71.71l.27.28v.78L20 21.49 21.49 20l-5.99-6zm-5 0A4.5 4.5 0 1 1 10.5 5a4.5 4.5 0 0 1 0 9z"/></svg>
+          <input name="q" type="search" placeholder="Search the web with Google" aria-label="Search query" required>
+        </div>
+        <div class="buttons"><button type="submit">Search</button><button type="button" onclick="document.querySelector('input[name=q]').value='';document.querySelector('input[name=q]').focus()">Clear</button></div>
+      </form>
+      <p class="note">Adarsh Search is an independent search interface. Search results are provided by Google.</p>
+    </div>
+
+    <section id="about">
+      <h2>About Us</h2>
+      <p>Welcome to Adarsh Search. Our goal is to provide visitors with a simple and convenient way to search the web. This website offers a search interface that sends queries to Google. We are an independent website and are not affiliated with or endorsed by Google.</p>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <p>If you have questions, feedback, or suggestions about Adarsh Search, please contact the website owner:</p>
+      <p class="contact-email"><strong>Email:</strong> <a href="mailto:YOUR_EMAIL@example.com">YOUR_EMAIL@example.com</a></p>
+      <p><strong>Important:</strong> Replace YOUR_EMAIL@example.com with your real contact email before publishing.</p>
+    </section>
+
+    <section id="privacy">
+      <h2>Privacy Policy</h2>
+      <p>This Privacy Policy explains how Adarsh Search handles information.</p>
+      <h3>Search queries</h3>
+      <p>When you use the search box, your query is sent to Google. Google's services may collect and process information according to Google's own privacy policy. Please review Google's privacy policy for details.</p>
+      <h3>Information we collect</h3>
+      <p>This static website does not have its own account system or database and does not intentionally collect search queries directly. The hosting provider may process technical information such as IP address and request logs to operate and secure the website.</p>
+      <h3>Cookies and third-party services</h3>
+      <p>Google or the hosting provider may use cookies or similar technologies in their services. Their practices are governed by their respective policies.</p>
+      <h3>Changes</h3>
+      <p>We may update this Privacy Policy when our website or practices change. Updates will be posted on this page.</p>
+      <h3>Contact</h3>
+      <p>For privacy questions, contact YOUR_EMAIL@example.com (replace this with your real email address).</p>
+    </section>
+
+    <section id="disclaimer">
+      <h2>Disclaimer</h2>
+      <p>Adarsh Search is an independent website. It is not owned by, sponsored by, or affiliated with Google. Search results and services are provided by Google and are subject to Google's terms and policies. We do not control third-party websites shown in search results and are not responsible for their content, availability, or privacy practices.</p>
+    </section>
+  </main>
+
+  <footer>
+    <a href="#about">About Us</a>
+    <a href="#contact">Contact Us</a>
+    <a href="#privacy">Privacy Policy</a>
+    <a href="#disclaimer">Disclaimer</a>
+  </footer>
 </body>
 </html>
